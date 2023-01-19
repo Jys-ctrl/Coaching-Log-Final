@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Aldesa BPO</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/img/aldesa.jpg" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4/css/metro-all.min.css">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/boxicons/css/boxicons.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/quill/quill.snow.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/quill/quill.bubble.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/remixicon/remixicon.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/simple-datatables/style.css}"/>
+
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="header fixed-top d-flex align-items-center" id="header">
+    <div class="d-flex align-items-center justify-content-between">
+        <a class="logo d-flex align-items-center" th:href="@{/dashboard}">
+            <img alt="Aldesa Logo" height="25" src="/img/aldesa.png">
+            <span class="d-none d-lg-block">BPO</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="#">
+              <span class="d-none d-md-block dropdown-toggle ps-2"
+                    th:text="${session.User.firstname+' '+session.User.lastname}">Username</span>
+                </a><!-- End Profile Image Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6 th:text="${session.User.firstname+' '+session.User.lastname}">Username</h6>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}" th:method="get">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside class="sidebar" id="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Coaching Log </span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul class="nav-content collapse show" data-bs-parent="#sidebar-nav" id="forms-nav">
+                <li>
+                    <a th:href="@{/dashboard}">
+                        <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/coachingLogFiles}">
+                        <i class="bi bi-file-bar-graph"></i><span>Files</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-video"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul class="nav-content collapse " data-bs-parent="#sidebar-nav" id="charts-nav">
+                <li>
+                    <a th:href="@{/dashboardEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/registerEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>Register</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/listofEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>List of Employee</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+        </li>
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main class="main" id="main">
+
+    <div class="pagetitle">
+        <h1>Coaching Log</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/employeeDashboard}">Employee</a></li>
+                <li class="breadcrumb-item active">Create Coaching Log</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- Multi Columns Form -->
+                        <form class="row g-3 needs-validation" method="post" novalidate th:action="@{/addFeedback/}">
+
+                            <div th:if="${session.message}" class="alert alert-dismissible fade show" th:classappend="${'alert-'+session.message.type}" role="alert">
+                                <span th:text="${session.message.content}"></span>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="inputEmpName">Employee Name:</label>
+                                <div class="col-sm-11">
+                                    <div class="input-group has-validation">
+                                        <input class="form-control" maxlength="50" readonly="readonly"
+                                               required
+                                               th:name="fullName" th:value="${Employee.fullName}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="inputEmpNo">Employee Number:</label>
+                                <div class="col-sm-11">
+                                    <input class="form-control" max="9999" readonly="readonly"
+                                           required th:name="employeeID" th:value="${Employee.employeeID}"
+                                           type="number">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-2">
+                                    <label for="floatingSelect">Department:</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" max="9999" readonly="readonly"
+                                               required th:name="department" th:value="${Employee.department}"
+                                               type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="inputDate">Date:</label>
+                                <div class="col-sm-11">
+                                    <input class="form-control input-sm" id="crrntDate" required th:name="dateToday"
+                                           type="date">
+
+                                    <script>
+                                                                        var today = new Date();
+                                                                        document.getElementById('crrntDate').valueAsDate = today;
+
+
+
+
+
+
+
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-2">
+                                    <label for="floatingSelect">Employment Status:</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" max="9999" readonly="readonly"
+                                               required th:name="employmentStat" th:value="${Employee.employmentStat}"
+                                               type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row g-2">
+                                    <label for="floatingSelect">Position:</label>
+                                    <div class="col-sm-11">
+                                        <input class="form-control" maxlength="50" required th:name="position"
+                                               th:value="${Employee.position}"
+                                               type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <strong>
+                                    <label class="col-sm-7 col-form-label" for="inputInfraction"
+                                           style="font-size:25px">Infraction</label></strong>
+                                <div class="col-sm-15">
+<!--                                    <textarea class="form-control" required style="height: 100px"-->
+<!--                                              th:name="weekLyText"></textarea>-->
+                                    <input class="form-control" th:name="weekLyText"  type="text" data-role="taginput" data-tag-trigger="Comma">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <strong>
+                                    <label class="col-sm-7 col-form-label" for="inputInfraction"
+                                           style="font-size:25px">Occurence</label></strong>
+                                <div class="col-sm-15">
+                                    <div class="input-group has-validation">
+                                        <select aria-label="Default select example" class="form-select" required
+                                                th:name="occurence">
+                                            <option selected value=""></option>
+                                            <option value="First Coaching">First Coaching</option>
+                                            <option value="Second Coaching">Second Coaching</option>
+                                            <option value="Third Coaching">Third Coaching</option>
+                                            <option value="Fourth Coaching">Fourth Coaching</option>
+                                            <option value="Fifth Coaching">Fifth Coaching</option>
+                                            <option value="Sixth Coaching">Sixth Coaching</option>
+                                            <option value="Seventh Coaching">Seventh Coaching</option>
+                                            <option value="Eighth Coaching">Eighth Coaching</option>
+                                            <option value="Ninth Coaching">Ninth Coaching</option>
+                                            <option value="Tenth Coaching">Tenth Coaching</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <strong>
+                                    <label class="col-sm-7 col-form-label" for="inputPerfStats"
+                                           style="font-size:25px">Details</label></strong>
+                                <div class="col-sm-15">
+                                    <textarea class="form-control" required style="height: 100px"
+                                              th:name="performanceStats"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <strong><label class="col-sm-7 col-form-label"
+                                               for="inputEvalFb"
+                                               style="font-size:25px">Evaluation/Feedback:</label></strong>
+                                <div class="col-sm-15">
+                                    <textarea class="form-control" required style="height: 100px"
+                                              th:name="evalFeedback"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <strong><label class="col-sm-7 col-form-label" for="inputEmpCmmt"
+                                               style="font-size:25px">Employee's
+                                    Commitment:</label></strong>
+                                <div class="content">
+                                    <textarea class="form-control" required style="height: 100px"
+                                              th:name="empComment"></textarea>
+                                </div>
+                                <script th:src="@{/js/script.js}"></script>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="inputIssuedBy">Issued By:</label>
+                                <div class="col-sm-11">
+                                    <div class="input-group has-validation">
+                                        <input class="form-control" maxlength="50" required
+                                               th:name="issuedBy"
+                                               th:value="${Employee.TL}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="inputAppBy">Approved By:</label>
+                                <div class="col-sm-11">
+                                    <div class="input-group has-validation">
+                                        <input class="form-control" maxlength="50" required
+                                               th:name="approvedBy"
+                                               th:value="${Employee.STL}" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row g-2">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row g-2">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row g-2">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row g-2">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="row g-2">
+                                    <button class="btn btn-success" type="submit">Save Form</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer class="footer" id="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Aldesa BPO</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/vendor/apexcharts/apexcharts.min.js}">
+
+
+</script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/chart.js/chart.min.js}"></script>
+<script th:src="@{/vendor/echarts/echarts.min.js}"></script>
+<script th:src="@{/vendor/quill/quill.min.js}"></script>
+<script th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+<script th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+
+<script src="https://cdn.korzh.com/metroui/v4/js/metro.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Aldesa BPO</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/img/aldesa.jpg" rel="icon">
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/boxicons/css/boxicons.min.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/quill/quill.snow.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/quill/quill.bubble.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/remixicon/remixicon.css}"/>
+    <link rel="stylesheet" th:href="@{/vendor/simple-datatables/style.css}"/>
+
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <!-- =======================================================
+    * Template Name: NiceAdmin - v2.2.2
+    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="header fixed-top d-flex align-items-center" id="header">
+    <div class="d-flex align-items-center justify-content-between">
+        <a class="logo d-flex align-items-center" th:href="@{/dashboard}">
+            <img alt="Aldesa Logo" height="25" src="/img/aldesa.png">
+            <span class="d-none d-lg-block">BPO</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="#">
+              <span class="d-none d-md-block dropdown-toggle ps-2"
+                    th:text="${session.User.firstname+' '+session.User.lastname}">Username</span>
+                </a><!-- End Profile Image Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6 th:text="${session.User.firstname+' '+session.User.lastname}">Username</h6>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}" th:method="get">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside class="sidebar" id="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Coaching Log </span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul class="nav-content collapse" data-bs-parent="#sidebar-nav" id="forms-nav">
+                <li>
+                    <a th:href="@{/dashboard}">
+                        <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/coachingLogFiles}">
+                        <i class="bi bi-file-bar-graph"></i><span>Files</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-video"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul class="nav-content collapse show" data-bs-parent="#sidebar-nav" id="charts-nav">
+                <li>
+                    <a th:href="@{/dashboardEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/registerEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>Register</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/listofEmp}">
+                        <i class="bi bi-file-bar-graph"></i><span>List of Employee</span>
+                    </a>
+                </li>
+                <li>
+            </ul>
+        </li>
+
+    </ul>
+
+</aside><!-- End Sidebar-->
+
+<main class="main" id="main">
+
+    <div class="pagetitle">
+        <h1>Employee Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/dashboardEmp}">Employee</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+
+        <div class="row ">
+
+            <!-- Left side columns -->
+
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card revenue-card text-warning">
+                            <div class="card-body">
+                                <h5 class="card-title"><span>| Total</span> Employee</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#4B5320"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${EmployeeTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card caretaker-card">
+                            <div class="card-body">
+                                <h5 class="card-title"><span>| Total</span> ADMINS</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#FFD700"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${AdminTotal}"></h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Cove Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#4169E1"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${CoveTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card customers-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Alder Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#00FF00"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${AlderTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card sharer-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Loyalty Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#FF0000"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${LoyaltyTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card renter-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Billing Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#FFFF00"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${BillingTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card caretaker-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Training Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#EE82EE"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${TrainingTotal}"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card caretaker-card">
+                            <div class="card-body">
+                                <h5 class="card-title">SEO Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#FFD700"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${SEOTotal}"></h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-4 col-sm-6 col-md-4">
+                        <div class="card info-card caretaker-card">
+                            <div class="card-body">
+                                <h5 class="card-title">IT Department<span> | Total</span></h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-file-bar-graph" style="color:#FFD700"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 th:text="${ITTotal}"></h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-map"></i> Employee per Department</h5>
+
+                        <!-- Bar Chart -->
+                        <div id="barChart" style="min-height: 365px;">
+                        </div>
+
+                        <script th:inline="javascript">
+                                    var datas = [[${countByEmployee}]];
+                                    var categAveList = [[${departmentName}]];
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                      new ApexCharts(document.querySelector("#barChart"), {
+                                        series: [{
+                                        name:'Employee',
+                                          data: datas
+                                        }],
+                                        chart: {
+                                          type: 'bar',
+                                          height: 350
+                                        },
+                                        plotOptions: {
+                                          bar: {
+                                            borderRadius: 4,
+                                            horizontal: true,
+                                          }
+                                        },
+                                        dataLabels: {
+                                          enabled: false
+                                        },
+                                        xaxis: {
+                                          categories: categAveList,
+                                        }
+                                      }).render();
+                                    });
+
+                        </script>
+                        <!-- End Bar Chart -->
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+
+                <!-- Recent Activity -->
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+
+                            <div class="activity">
+
+                                <div class="activity-item d-flex" th:each="r,i : ${RecentActivity}">
+                                    <div class="activity-label">
+                                        <span th:text="${#calendars.format(r.date,'EEE, dd/MM/yy h a ')}"></span>
+                                    </div>
+                                    <i class='bi bi-circle-fill activity-badge  align-self-start'
+                                       th:classappend="${i.index==0 ? 'text-success' : i.index==1 ? 'text-danger' : i.index==2 ? 'text-primary' : i.index==3 ? 'text-info' : i.index==4 ? 'text-warning' : 'text-muted'}"></i>
+                                    <div class="activity-content">
+                                        <span th:text="${r.recentActivity}"> </span>
+                                    </div>
+                                </div><!-- End activity item-->
+
+                            </div>
+                        </div><!-- End Recent Activity -->
+                    </div><!-- End Right side columns -->
+                </div>
+
+                <div class="card">
+                    <div class="card-body"><h5 class="card-title">Total per Status(Probationary or Regular)</h5>
+                        <div id="pieChart" style="min-height: 352.7px;">
+                            <script th:inline="javascript">
+                            var countByStatus =[[${countByStatus}]];
+                            var statusName =[[${statusName}]];
+                            document.addEventListener("DOMContentLoaded", () => {
+                  new ApexCharts(document.querySelector("#pieChart"), {
+                    series: countByStatus,
+                    chart: {
+                      height: 350,
+                      type: 'pie',
+                      toolbar: {
+                        show: true
+                      }
+                    },
+                    labels: statusName,
+                    tooltip: {
+                      y: {
+                        formatter: function(val) {
+                          return  val
+                        }
+                      }
+                    }
+                  }).render();
+                });
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer class="footer" id="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Aldesa BPO</span></strong>. All Rights Reserved
+    </div>
+</footer>
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/vendor/apexcharts/apexcharts.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/chart.js/chart.min.js}"></script>
+<script th:src="@{/vendor/echarts/echarts.min.js}"></script>
+<script th:src="@{/vendor/quill/quill.min.js}"></script>
+<script th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+<script th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>

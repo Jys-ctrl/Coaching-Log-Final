@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Aldesa BPO</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/aldesa.jpg" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/boxicons/css/boxicons.min.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/quill/quill.snow.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/quill/quill.bubble.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/remixicon/remixicon.css}"/>
+  <link rel="stylesheet" th:href="@{/vendor/simple-datatables/style.css}"/>
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header class="header fixed-top d-flex align-items-center" id="header">
+  <div class="d-flex align-items-center justify-content-between">
+    <a class="logo d-flex align-items-center" th:href="@{/dashboard}">
+      <img alt="Aldesa Logo" height="25" src="/img/aldesa.png">
+      <span class="d-none d-lg-block">BPO</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+
+  </div><!-- End Logo -->
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item dropdown pe-3">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown" href="#">
+              <span class="d-none d-md-block dropdown-toggle ps-2"
+                    th:text="${session.User.firstname+' '+session.User.lastname}">Username</span>
+        </a><!-- End Profile Image Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6 th:text="${session.User.firstname+' '+session.User.lastname}">Username</h6>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" th:href="@{/logout}" th:method="get">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside class="sidebar" id="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Coaching Log </span><i
+              class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul class="nav-content collapse" data-bs-parent="#sidebar-nav" id="forms-nav">
+        <li>
+          <a th:href="@{/dashboard}">
+            <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/coachingLogFiles}">
+            <i class="bi bi-file-bar-graph"></i><span>Files</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person-video"></i><span>Employee</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul class="nav-content collapse " data-bs-parent="#sidebar-nav" id="charts-nav">
+        <li>
+          <a th:href="@{/dashboardEmp}">
+            <i class="bi bi-file-bar-graph"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/registerEmp}">
+            <i class="bi bi-file-bar-graph"></i><span>Register</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/listofEmp}">
+            <i class="bi bi-file-bar-graph"></i><span>List of Employee</span>
+          </a>
+        </li>
+        <li>
+      </ul>
+    </li>
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+<main class="main" id="main">
+
+  <div class="pagetitle">
+    <h1>Coaching Log</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/coachingLogFiles}">Files</a></li>
+        <li class="breadcrumb-item active">Coaching Log Files</a></li>
+        <li class="breadcrumb-item active">View Coaching Log</a></li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <!-- Multi Columns Form -->
+            <form class="row g-3 needs-validation" method="get" th:action="@{/agentCL/}+${session.User.id}" novalidate>
+              <div class="col-md-6">
+                <label class="form-label" for="inputEmpName">Employee Name:</label>
+                <div class="col-sm-11">
+                  <div class="input-group has-validation">
+                    <input class="form-control input-sm" th:value="${Feedback.fullName}" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="inputEmpNo">Employee Number:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.employeeID}" disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row g-2">
+                  <label for="floatingSelect">Department:</label>
+                  <div class="col-sm-11">
+                    <div class="input-group has-validation">
+                      <input class="form-control input-sm" th:value="${Feedback.department}" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="inputDate">Date:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.dateToday}" disabled>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row g-2">
+                  <label for="floatingSelect">Employment Status:</label>
+                  <div class="col-sm-11">
+                    <div class="input-group has-validation">
+                      <input class="form-control input-sm" th:value="${Feedback.employmentStat}" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row g-2">
+                  <label for="floatingSelect">Position:</label>
+                  <div class="col-sm-11">
+                    <div class="input-group has-validation">
+                      <input class="form-control input-sm" th:value="${Feedback.position}" disabled>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row mb-3">
+                <div class="col-sm-10">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <strong>
+                  <label class="col-sm-7 col-form-label" for="inputInfraction"
+                         style="font-size:25px">Infraction</label></strong>
+                <div class="col-sm-15">
+
+                  <textarea class="form-control input-sm"
+                            th:text="${Feedback.weekLyText}" disabled>
+                  </textarea>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <strong>
+                  <label class="col-sm-7 col-form-label" for="inputPerfStats"
+                         style="font-size:25px">Details</label></strong>
+                <div class="col-sm-15">
+                  <textarea class="form-control input-sm"
+                            th:text="${Feedback.performanceStats}" disabled>
+                  </textarea>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <strong><label class="col-sm-7 col-form-label"
+                               for="inputEvalFb"
+                               style="font-size:25px">Evaluation/Feedback:</label></strong>
+                <div class="col-sm-15">
+                  <textarea class="form-control input-sm" style="height: 100px; display:block;overflow: hidden;resize: none;
+                            border-left:0px;
+                            border-right:0px;
+                            border-top:0px;
+                            margin-bottom:50px;
+                            width:100%;
+                            padding:15px;
+                            padding-bottom:0px}
+                            textarea:focus{
+                            outline:none}
+                            .textarea-container{
+                            width:50%;
+                            position:relative;
+                            left:100px;}
+                            .textarea-container h3{
+                            color:blue"
+                            th:text="${Feedback.evalFeedback}" disabled>
+                  </textarea>
+                  <script>
+
+                  </script>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <strong><label class="col-sm-7 col-form-label" for="inputEmpCmmt"
+                               style="font-size:25px">Employee's
+                  Commitment:</label></strong>
+                <div class="content">
+                  <textarea class="form-control input-sm"
+                            th:text="${Feedback.empComment}" disabled></textarea>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-sm-10">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-10">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="inputEmpName">Employee Name:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.fullName}" disabled>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="inputIssuedBy">Issued By:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.issuedBy}" disabled>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="inputDate">Date:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.dateToday}" disabled>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="inputAppBy">Approved By:</label>
+                <div class="col-sm-11">
+                  <input class="form-control input-sm" th:value="${Feedback.approvedBy}" disabled>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="row g-2">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row g-2">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="row g-2">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="row g-2">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="row g-2">
+                  <a class="print_link" href="#" onClick="window.print()">Print Form</a>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer class="footer" id="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>Aldesa BPO</span></strong>. All Rights Reserved
+  </div>
+</footer><!-- End Footer -->
+
+<a class="back-to-top d-flex align-items-center justify-content-center" href="#"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/vendor/apexcharts/apexcharts.min.js}">
+
+
+</script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/chart.js/chart.min.js}"></script>
+<script th:src="@{/vendor/echarts/echarts.min.js}"></script>
+<script th:src="@{/vendor/quill/quill.min.js}"></script>
+<script th:src="@{/vendor/simple-datatables/simple-datatables.js}"></script>
+<script th:src="@{/vendor/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+
+</html>
