@@ -198,7 +198,7 @@
                                                         <th scope="col">Department</th>
                                                         <th scope="col">Agent's TL</th>
                                                         <th scope="col">Date Submitted</th>
-                                                        <th scope="col">Remarks</th>
+<!--                                                        <th scope="col">Remarks</th>-->
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -209,8 +209,15 @@
                                                         <td th:text="${feedback.department}"></td>
                                                         <td th:text="${feedback.issuedBy}"></td>
                                                         <td th:text="${feedback.dateToday}"></td>
-                                                        <td><input type="text"  th:name="remarks"/>
-                                                            <button class="tool-button" type="submit"><span class="mif-floppy-disk"></span></button></td>
+<!--                                                        <td><input type="text"  th:name="remarks"/>-->
+<!--                                                            <input type="button" id="saveBT" value="save" class="tool-button" onclick="saveRemarks"></td>-->
+<!--                                                        <script>-->
+<!--                                                            function saveBT {-->
+<!--                                                                var remarks = document.getElementbyId("remarks").value;-->
+<!--                                                                -->
+<!--                                                            }-->
+
+<!--                                                        </script>-->
                                                         </tr>
                                                     </tbody>
                                                 </table>
