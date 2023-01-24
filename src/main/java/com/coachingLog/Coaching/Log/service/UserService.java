@@ -176,7 +176,7 @@ public class UserService {
     public Optional<Feedback> addRemarks(Feedback feedback, Long feedbackID) throws Exception{
         return feedbackRepository.findById(feedbackID)
                 .map(res -> {
-                    res = feedback;
+                    res.setRemarks(feedback.getRemarks());
                     return feedbackRepository.save(res);
                 });
     }

@@ -44,31 +44,37 @@ public class CoachingLogFileController {
 
 
 
-//    @GetMapping("/remarks/{feedbackID}")
-//    public String remarks(@PathVariable Long feedbackID, Model model, HttpServletRequest request, HttpServletResponse response) {
-//        Optional<Feedback> feedback = userService.findFeedbackById(feedbackID);
-//        model.addAttribute("EmploymentStat", userService.getAllEmployment());
-//        model.addAttribute("Department", userService.getAllDepartment());
-//        model.addAttribute("Feedback", feedback.get());
-//        HttpSession session = request.getSession();
-//        if (session.getAttribute("User") != null && feedback.isPresent())
-//            return "remarks";
-//        else return "redirect:/";
-//    }
-//
-//
-//    @RequestMapping(value = "/addRemarks/{feedbackID}", method = RequestMethod.GET)
-//    public String addRemarks(@ModelAttribute Feedback feedback, @PathVariable Long feedbackID) {
-//        try {
-//            Optional<Feedback> res = userService.addRemarks(feedback, feedbackID);
-//            if (res.isPresent())
-//                return "redirect:/remarks/" + res.get().getFeedbackID() + "?success=success";
-//            else
-//                return "redirect:/remarks?error= Cannot add remarks record not found.";
-//        } catch (Exception e) {
-//            return "redirect:/remarks?error=" + e.getMessage();
-//        }
-//    }
+    @GetMapping("/remarks/{feedbackID}")
+    public String remarks(@PathVariable Long feedbackID, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Optional<Feedback> feedback = userService.findFeedbackById(feedbackID);
+        model.addAttribute("EmploymentStat", userService.getAllEmployment());
+        model.addAttribute("Department", userService.getAllDepartment());
+        model.addAttribute("Feedback", feedback.get());
+        HttpSession session = request.getSession();
+        if (session.getAttribute("User") != null && feedback.isPresent())
+            if (((User)session.getAttribute("User")).getUsertype().matches("hr-admin")) {
+                return "remarks";
+            }
+            else {
+                return "redirect:/dashboardEmp";
+            }
+        else
+            return "redirect:/";
+    }
+
+
+    @RequestMapping(value = "/addRemarks/{feedbackID}", method = RequestMethod.GET)
+    public String addRemarks(@ModelAttribute Feedback feedback, @PathVariable Long feedbackID) {
+        try {
+            Optional<Feedback> res = userService.addRemarks(feedback, feedbackID);
+            if (res.isPresent())
+                return "redirect:/remarks/" + res.get().getFeedbackID() + "?success=success";
+            else
+                return "redirect:/remarks?error= Cannot add remarks record not found.";
+        } catch (Exception e) {
+            return "redirect:/remarks?error=" + e.getMessage();
+        }
+    }
 
     @GetMapping("/employeeUpdate/{id}")
     public String employeeUpdate(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) {

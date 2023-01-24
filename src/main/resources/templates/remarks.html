@@ -249,53 +249,6 @@
                                 </div>
                             </div>
 
-
-                                                                    <!--             END               -->
-
-                            <div class="col-md-6">
-                                    <input  th:text="employmentStat"
-                                           th:value="${Feedback.employmentStat}" hidden="hidden">
-                            </div>
-
-                            <div class="col-md-6">
-                                    <input  th:value="${Feedback.position}"
-                                           th:text="position" type="text" hidden="hidden">
-                            </div>
-
-                            <div class="row mb-3">
-                                    <input th:value="${Feedback.weekLyText}"
-                                           th:text="weekLyText" hidden="hidden">
-                            </div>
-
-                            <div class="row mb-3">
-                                        <input  readonly="readonly" th:value="${Feedback.occurence}"
-                                               th:text="occurence" hidden="hidden">
-                            </div>
-
-                            <div class="col-md-6">
-                                <input   th:text="approvedBy"
-                                       th:value="${Feedback.approvedBy}" hidden="hidden">
-                            </div>
-
-                            <div class="row mb-3">
-                  <textarea id="text-area" class="form-control input-sm" th:text="performanceStats" th:value="${Feedback.performanceStats}"
-                            hidden>
-                  </textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                  <textarea id="text-area" class="form-control input-sm" readonly="readonly" th:value="${Feedback.evalFeedback}"
-                            th:text="evalFeedback" hidden>
-                  </textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                    <textarea id="text-area" class="form-control input-sm" readonly="readonly" th:value="${Feedback.empComment}"
-                                              th:text="empComment" hidden></textarea>
-                            </div>
-
-
-
                         </form>
 
                     </div>
