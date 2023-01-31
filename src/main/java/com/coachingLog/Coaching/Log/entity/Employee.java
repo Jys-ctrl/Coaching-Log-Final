@@ -50,4 +50,10 @@ public class Employee {
     @Column(name = "STL", columnDefinition = "VARCHAR(50)")
     private String STL;
 
+    @Column(name = "UserType", columnDefinition = "VARCHAR(50)")
+    private String UserType;
+
+    @Column(name = "teamLead")
+    private long teamLead;
+
 }

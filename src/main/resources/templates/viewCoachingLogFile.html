@@ -39,7 +39,7 @@
 <header class="header fixed-top d-flex align-items-center" id="header">
     <div class="d-flex align-items-center justify-content-between">
         <a class="logo d-flex align-items-center" th:href="@{/dashboard}">
-            <img th:src="@{/img/aldesa.png}" height="25">
+            <img height="25" th:src="@{/img/aldesa.png}">
             <span class="d-none d-lg-block">BPO</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -149,7 +149,7 @@
                     <div class="card-body-viewCL">
 
                         <!-- Multi Columns Form -->
-                        <form class="row g-3 needs-validation" method="get" id="form-print"
+                        <form class="row g-3 needs-validation" id="form-print" method="get"
                               novalidate th:action="@{/viewCL/}+${Feedback.feedbackID}">
                             <center>
                                 <img alt="Aldesa Logo" height="60" src="/img/aldesa.png">
@@ -157,15 +157,15 @@
                             </center>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputEmpName">Employee Name:</label></strong>
+                                <strong><label class="form-label">Employee Name:</label></strong>
                                 <div class="col-sm-15">
-                                        <input class="form-control input-sm" readonly="readonly"
-                                               th:value="${Feedback.fullName}">
+                                    <input class="form-control input-sm" readonly="readonly"
+                                           th:value="${Feedback.fullName}">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputEmpNo">Employee Number:</label></strong>
+                                <strong><label class="form-label">Employee Number:</label></strong>
                                 <div class="col-sm-15">
                                     <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.employeeID}">
@@ -173,47 +173,47 @@
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label for="form-label">Department:</label></strong>
+                                <strong><label class="form-label">Department:</label></strong>
                                 <div class="col-sm-15">
-                                            <input class="form-control input-sm" readonly="readonly"
-                                                   th:value="${Feedback.department}">
+                                    <input class="form-control input-sm" readonly="readonly"
+                                           th:value="${Feedback.department}">
                                 </div>
-                                </div>
+                            </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputDate">Date:</label></strong>
+                                <strong><label class="form-label">Date:</label></strong>
                                 <div class="col-sm-15">
-                                <input class="form-control input-sm" readonly="readonly"
+                                    <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.dateToday}">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label for="form-label">Employment Status:</label></strong>
+                                <strong><label class="form-label">Employment Status:</label></strong>
                                 <div class="col-sm-15">
-                                            <input class="form-control input-sm" readonly="readonly"
-                                                   th:value="${Feedback.employmentStat}">
+                                    <input class="form-control input-sm" readonly="readonly"
+                                           th:value="${Feedback.employmentStat}">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label for="form-label">Position:</label></strong>
+                                <strong><label class="form-label">Position:</label></strong>
                                 <div class="col-sm-15">
-                                            <input class="form-control input-sm" readonly="readonly"
-                                                   th:value="${Feedback.position}">
+                                    <input class="form-control input-sm" readonly="readonly"
+                                           th:value="${Feedback.position}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                             </div>
 
-<!--                            <div class="row mb-3">-->
-<!--                                <strong><label class="col-sm-7 col-form-label" for="inputInfraction"-->
-<!--                                           style="font-size:25px">Infraction</label></strong>-->
-<!--                                <textarea id="text-area" class="form-control input-sm"-->
-<!--                                            readonly="readonly" th:text="${Feedback.weekLyText}">-->
-<!--                                </textarea>-->
-<!--                            </div>-->
+                            <!--                            <div class="row mb-3">-->
+                            <!--                                <strong><label class="col-sm-7 col-form-label" for="inputInfraction"-->
+                            <!--                                           style="font-size:25px">Infraction</label></strong>-->
+                            <!--                                <textarea id="text-area" class="form-control input-sm"-->
+                            <!--                                            readonly="readonly" th:text="${Feedback.weekLyText}">-->
+                            <!--                                </textarea>-->
+                            <!--                            </div>-->
 
                             <div class="row mb-3">
                                 <strong>
@@ -239,10 +239,10 @@
 
                             <div class="row mb-3">
                                 <strong>
-                                    <label class="col-sm-7 col-form-label" for="inputPerfStats"
+                                    <label class="col-sm-7 col-form-label"
                                            style="font-size:25px">Details</label></strong>
                                 <div class="col-sm-15">
-                  <textarea id="text-area" class="form-control input-sm"
+                  <textarea class="form-control input-sm" id="text-area"
                             readonly="readonly" th:text="${Feedback.performanceStats}">
                   </textarea>
                                 </div>
@@ -250,25 +250,24 @@
 
                             <div class="row mb-3">
                                 <strong><label class="col-sm-7 col-form-label"
-                                               for="inputEvalFb"
                                                style="font-size:25px">Evaluation/Feedback:</label></strong>
                                 <div class="col-sm-15">
-                  <textarea id="text-area" class="form-control input-sm" readonly="readonly"
-                           th:text="${Feedback.evalFeedback}">
+                  <textarea class="form-control input-sm" id="text-area" readonly="readonly"
+                            th:text="${Feedback.evalFeedback}">
                   </textarea>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <strong><label class="col-sm-7 col-form-label" for="inputEmpCmmt"
+                                <strong><label class="col-sm-7 col-form-label"
                                                style="font-size:25px">Employee's Commitment:</label></strong>
                                 <div class="col-sm-15">
-                                    <textarea id="text-area" class="form-control input-sm" readonly="readonly"
+                                    <textarea class="form-control input-sm" id="text-area" readonly="readonly"
                                               th:text="${Feedback.empComment}"></textarea>
                                 </div>
                             </div>
 
-                            <script type="text/javascript" language="javascript">
+                            <script language="javascript" type="text/javascript">
 resizeIt = function() {
               var str = $('text-area').value;
               var cols = $('text-area').cols;
@@ -284,6 +283,7 @@ resizeIt = function() {
             Event.observe('text-area', 'keydown', resizeIt );
 
             resizeIt(); //Initial on load
+
                             </script>
 
                             <div class="row mb-3">
@@ -292,7 +292,7 @@ resizeIt = function() {
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputEmpName">Employee Name:</label></strong>
+                                <strong><label class="form-label">Employee Name:</label></strong>
                                 <div class="col-sm-15">
                                     <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.fullName}">
@@ -300,7 +300,7 @@ resizeIt = function() {
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputIssuedBy">Issued By:</label></strong>
+                                <strong><label class="form-label">Issued By:</label></strong>
                                 <div class="col-sm-15">
                                     <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.issuedBy}">
@@ -308,7 +308,7 @@ resizeIt = function() {
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputDate">Date:</label></strong>
+                                <strong><label class="form-label">Date:</label></strong>
                                 <div class="col-sm-15">
                                     <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.dateToday}">
@@ -316,7 +316,7 @@ resizeIt = function() {
                             </div>
 
                             <div class="col-md-6">
-                                <strong><label class="form-label" for="inputAppBy">Approved By:</label></strong>
+                                <strong><label class="form-label">Approved By:</label></strong>
                                 <div class="col-sm-15">
                                     <input class="form-control input-sm" readonly="readonly"
                                            th:value="${Feedback.approvedBy}">
@@ -350,9 +350,9 @@ resizeIt = function() {
                         <center>
                             <div class="col-md-3">
                                 <div class="row g-2">
-<!--                                    <a class="print_link" href="#" onClick="window.print()">Print Form</a>-->
-                                    <input type="button" class="btn btn-primary"
-                                           onclick="GeneratePdf();" value="Generate PDF">
+                                    <!--                                    <a class="print_link" href="#" onClick="window.print()">Print Form</a>-->
+                                    <input class="btn btn-primary" onclick="GeneratePdf();"
+                                           type="button" value="Generate PDF">
                                     <script>
                                         function GeneratePdf() {
             var element = document.getElementById('form-print');
@@ -362,13 +362,15 @@ resizeIt = function() {
         html2canvas: { dpi: 192, letterRendering: true, scale: 2, logging: true},
         jsPDF: {orientation: 'portrait',unit: 'mm',format:'legal'}
         });}
+
                                     </script>
                                 </div>
-                            </div></center>
+                            </div>
+                        </center>
 
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
